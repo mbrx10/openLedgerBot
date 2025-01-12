@@ -56,6 +56,8 @@ cd openLedgerBot
 npm install
 ```
 
+## 💼 Wallets Configuration
+
 3. create wallets.txt file with your wallet addresses
 ```bash
 touch wallets.txt
@@ -64,6 +66,8 @@ touch wallets.txt
 ```bash
 nano wallets.txt
 ```
+
+## 🌐 Proxy Configuration
 
 4. create proxy.txt file with your proxies
 ```bash

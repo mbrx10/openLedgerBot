@@ -5,3 +5,11 @@ export const ENDPOINT_API = {
     GENERATE_TOKEN: 'https://apitn.openledger.xyz/api/v1/auth/generate_token',
     REALTIME_REWARDS: 'https://rewardstn.openledger.xyz/api/v1/reward_realtime'
 };
+
+export const INTERVALS = {
+    POINTS_CHECK: 9 * 60 * 1000,      // 9 menit
+    DAILY_REWARDS: 60 * 60 * 1000,    // 60 menit
+    RECONNECT_DELAY: 3000,
+    HEARTBEAT_DELAY: 30 * 1000,
+    WSS_RECONNECT_DELAY: 10000
+};

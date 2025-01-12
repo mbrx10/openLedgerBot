@@ -56,6 +56,29 @@ cd openLedgerBot
 npm install
 ```
 
+3. create wallets.txt file with your wallet addresses
+```bash
+touch wallets.txt
+```
+- add your wallet addresses to the wallets.txt file
+```bash
+nano wallets.txt
+```
+
+4. create proxy.txt file with your proxies
+```bash
+touch proxy.txt
+```
+- add your proxies to the proxy.txt file
+```bash
+nano proxy.txt
+```
+## 🚀 Usage
+
+Run the worker:
+```bash
+npm start
+```
 ## ⚙️ Configuration
 
 1. Create `wallets.txt` with wallet addresses (one per line):
@@ -73,13 +96,6 @@ http://username:password@ip:port
 # SOCKS proxies
 socks4://ip:port
 socks5://ip:port
-```
-
-## 🚀 Usage
-
-Run the worker:
-```bash
-npm start
 ```
 
 ## ⏱️ Intervals

@@ -1,4 +1,4 @@
-# 🤖 OpenLedger Worker Bot
+# 🤖 OpenLedger Workers Bot
 
 <div align="center">
 

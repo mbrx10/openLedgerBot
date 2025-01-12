@@ -13,7 +13,7 @@
 ## ✨ Features
 
 - 🔄 Auto claim daily rewards
-- 🔁 Auto reconnect when token expired
+- 🔁 Auto reconnecting
 - 👥 Support multiple accounts
 - 🌐 HTTP & SOCKS proxy support
 - 💓 30-second heartbeat interval

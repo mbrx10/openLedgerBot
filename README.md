@@ -93,7 +93,7 @@ npm start
 0xabcdef1234567890...
 ```
 
-2. (Optional) Create `proxy.txt` with proxies (one per line):
+2.Create `proxy.txt` with proxies (one per line):
 ```
 # HTTP proxies
 http://ip:port

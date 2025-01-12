@@ -4,7 +4,6 @@ import { readFile } from './utils/file.js';
 import { generateToken, getUserInfo, getClaimDetails, claimRewards } from './services/api.js';
 import { WebSocketClient } from './services/websocket.js';
 
-// Main function
 const main = async () => {
     log.info(banner);
     const wallets = readFile("wallets.txt")

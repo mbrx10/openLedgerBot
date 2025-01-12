@@ -46,7 +46,6 @@ export class WebSocketClient {
     };
 
     connect() {
-        // Clear existing interval if any
         if (this.intervalId) {
             clearInterval(this.intervalId);
             this.intervalId = null;

@@ -7,9 +7,9 @@ export const ENDPOINT_API = {
 };
 
 export const INTERVALS = {
-    POINTS_CHECK: 9 * 60 * 1000,      // 9 menit
-    DAILY_REWARDS: 60 * 60 * 1000,    // 60 menit
-    RECONNECT_DELAY: 3000,
-    HEARTBEAT_DELAY: 30 * 1000,
-    WSS_RECONNECT_DELAY: 10000
+    POINTS_CHECK: 9 * 60 * 1000,      // 9 minutes
+    DAILY_REWARDS: 60 * 60 * 1000,    // 60 minutes
+    RECONNECT_DELAY: 3000,            // 3 seconds
+    HEARTBEAT_DELAY: 30 * 1000,      // 30 seconds
+    WSS_RECONNECT_DELAY: 10000       // 10 seconds
 };

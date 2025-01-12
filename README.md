@@ -62,6 +62,7 @@ npm install
 ```bash
 touch wallets.txt
 ```
+
 - add your wallet addresses to the wallets.txt file
 ```bash
 nano wallets.txt
@@ -73,6 +74,7 @@ nano wallets.txt
 ```bash
 touch proxy.txt
 ```
+
 - add your proxies to the proxy.txt file
 ```bash
 nano proxy.txt

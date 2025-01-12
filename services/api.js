@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import { ENDPOINT_API } from '../config/api.js';
+import { ENDPOINT_API, INTERVALS } from '../config/api.js';
 import { httpHeaders } from '../config/headers.js';
 import { newAgent } from '../utils/proxy.js';
 import log from '../utils/logger.js';
@@ -91,5 +91,25 @@ export async function claimRewards(token, proxy, index) {
     } catch (error) {
         log.error('Error claiming daily reward:', error.message || error);
         return null;
+    }
+}
+
+export async function processAccountLogin(address, proxy, index) {
+    let response = await generateToken({ address }, proxy);
+    while (!response || !response.token) {
+        log.error(`Account ${index} token failed, retrying...`)
+        await new Promise(resolve => setTimeout(resolve, INTERVALS.RECONNECT_DELAY));
+        response = await generateToken({ address }, proxy);
+    }
+    log.info(`Account ${index + 1} logged in: Success`);
+    return response.token;
+}
+
+export async function processAccountRewards(token, proxy, index) {
+    log.info(`Account ${index + 1} checking rewards...`);
+    const claimDaily = await getClaimDetails(token, proxy, index + 1);
+    if (claimDaily && !claimDaily.claimed) {
+        log.info(`Account ${index + 1} claiming rewards...`);
+        await claimRewards(token, proxy, index + 1);
     }
 } 

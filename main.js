@@ -78,7 +78,7 @@ const main = async () => {
                     } catch (error) {
                         log.error(`Error fetching claim details for Account ${index + 1}: ${error.message || 'unknown error'}`);
                     }
-                }, 60 * 60 * 1000); // Fetch claim details every 60 minutes
+                }, 60 * 60 * 1000); 
 
             } catch (error) {
                 log.error(`Account ${index + 1} start failed:`, error.message || 'unknown error');

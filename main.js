@@ -64,7 +64,7 @@ const main = async () => {
                         clearInterval(userInfoInterval);
                         clearInterval(claimDetailsInterval);
                     }
-                }, 9 * 60 * 1000); // change to 9 minutes to prevent error 429 when claim daily reward.
+                }, 9 * 60 * 1000); 
 
                 claimDetailsInterval = setInterval(async () => {
                     try {

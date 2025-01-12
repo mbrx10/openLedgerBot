@@ -107,5 +107,4 @@ const main = async () => {
     await Promise.all(accountsProcessing);
 };
 
-// run
 main();

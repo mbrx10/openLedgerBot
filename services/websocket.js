@@ -1,6 +1,6 @@
 import WebSocket from 'ws';
 import crypto from 'crypto';
-import { ENDPOINT_API } from '../config/api.js';
+import { ENDPOINT_API, INTERVALS } from '../config/api.js';
 import { wsHeaders } from '../config/headers.js';
 import { createHeartbeat, createRegWorkerID } from '../config/websocket.js';
 import { newAgent } from '../utils/proxy.js';
@@ -70,7 +70,7 @@ export class WebSocketClient {
             this.intervalId = setInterval(() => {
                 log.info(`Account ${this.index} heartbeat sent`);
                 this.sendMessage(this.heartbeat);
-            }, 30 * 1000);
+            }, INTERVALS.HEARTBEAT_DELAY);
         });
 
         this.ws.on('message', (event) => {
@@ -94,14 +94,14 @@ export class WebSocketClient {
         });
 
         this.ws.on('error', (error) => {
-            log.error(`Account ${this.index} Error: ${error.response?.status || error.code}`);
+            log.error(`Account ${this.index} Error: ${error.message}`);
         });
 
         this.ws.on('close', () => {
             clearInterval(this.intervalId);
             if (this.reconnect) {
                 log.warn(`Account ${this.index} reconnecting...`);
-                setTimeout(() => this.connect("reconnect"), 10000);
+                setTimeout(() => this.connect("reconnect"), INTERVALS.WSS_RECONNECT_DELAY);
             } else {
                 log.warn(`Account ${this.index} closed`);
             }
@@ -127,4 +127,35 @@ export class WebSocketClient {
             this.ws = null;
         }
     }
+}
+
+export function setupAccountIntervals(token, proxy, index, socket) {
+    const userInfoInterval = setInterval(async () => {
+        log.info(`Account ${index + 1} checking points...`);
+        const user = await getUserInfo(token, proxy, index + 1);
+
+        if (user === 'unauthorized') {
+            log.info(`Account ${index + 1} token expired, reconnecting...`);
+            socket.close();
+            clearInterval(userInfoInterval);
+            clearInterval(claimDetailsInterval);
+            return false;
+        }
+    }, INTERVALS.POINTS_CHECK);
+
+    const claimDetailsInterval = setInterval(async () => {
+        try {
+            log.info(`Checking Daily Rewards for Account ${index + 1}...`)
+            const claimDetails = await getClaimDetails(token, proxy, index + 1);
+
+            if (claimDetails && !claimDetails.claimed) {
+                log.info(`Trying to Claim Daily rewards for Account ${index + 1}...`);
+                await claimRewards(token, proxy, index + 1);
+            }
+        } catch (error) {
+            log.error(`Error fetching claim details for Account ${index + 1}: ${error.message || 'unknown error'}`);
+        }
+    }, INTERVALS.DAILY_REWARDS);
+
+    return { userInfoInterval, claimDetailsInterval };
 } 

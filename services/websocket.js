@@ -5,7 +5,7 @@ import { wsHeaders } from '../config/headers.js';
 import { createHeartbeat, createRegWorkerID } from '../config/websocket.js';
 import { newAgent } from '../utils/proxy.js';
 import { generateRandomCapacity } from '../utils/capacity.js';
-import { getUserInfo } from '../services/api.js';
+import { getUserInfo, getClaimDetails, claimRewards } from './api.js';
 import log from '../utils/logger.js';
 import chalk from 'chalk';
 
